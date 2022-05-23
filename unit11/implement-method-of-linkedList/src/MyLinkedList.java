@@ -145,10 +145,10 @@ public class MyLinkedList<E> {
         MyLinkedList<E> clone = new MyLinkedList<>(head.data);
         Node temp = head;
         Node tempClone = clone.head;
-       while (temp != null) {
-           tempClone.data = temp.data;
+       while (temp.next != null) {
            clone.numNodes++;
            temp = temp.next;
+           tempClone.next = new Node(temp.data);
            tempClone = tempClone.next;
        }
        return clone;

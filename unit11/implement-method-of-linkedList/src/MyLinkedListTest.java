@@ -16,7 +16,7 @@ public class MyLinkedListTest {
         System.out.println(myLinkedLists.get(5));
         myLinkedLists.add(3,3);
         //Null Pointer Exception
-//        (myLinkedLists.clone()).printList();
+        (myLinkedLists.clone()).printList();
         myLinkedLists.printList();
         myLinkedLists.clear();
         myLinkedLists.printList();
