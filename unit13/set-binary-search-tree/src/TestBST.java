@@ -2,13 +2,13 @@ public class TestBST {
     public static void main(String[] args) {
         //create a BST
         BST<String> tree = new BST<>();
-        tree.insert("George");
-        tree.insert("Michael");
-        tree.insert("Tom");
-        tree.insert("Adam");
-        tree.insert("Jones");
-        tree.insert("Peter");
-        tree.insert("Daniel");
+        tree.insert("B");
+        tree.insert("C");
+        tree.insert("A");
+        tree.insert("E");
+        tree.insert("D");
+        tree.insert("F");
+        tree.insert("G");
         //traverse tree
         System.out.println("Inorder (sorted): ");
         tree.inorder();
