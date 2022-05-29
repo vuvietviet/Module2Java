@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class FindMaxValue {
     public static int findMax(List<Integer> numbers) {
@@ -12,6 +13,10 @@ public class FindMaxValue {
     }
 
     public static void main(String[] args) {
+//        System.out.println("Input path of file: ");
+//        Scanner scanner = new Scanner(System.in);
+//        String path = scanner.nextLine();
+
         ReadAndWriteFile readAndWriteFile = new ReadAndWriteFile();
         List<Integer> numbers = readAndWriteFile.readFile("F:/java.io.file/module2Unit17Numbers.txt");
         int maxValue = findMax(numbers);

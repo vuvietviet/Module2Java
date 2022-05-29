@@ -18,7 +18,7 @@ public class ReadAndWriteFile {
             }
             br.close();
         } catch (Exception e) {
-            System.err.println("File not found or error content");
+            e.printStackTrace();
         }
         return numbers;
     }
