@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.Scanner;
 
 public class CopyFile {
     String str = "";
@@ -36,6 +37,7 @@ public class CopyFile {
                 bw.write(str.charAt(i));
             }
             System.out.println("Writing successful");
+            bw.close();
         } catch (Exception e) {
             System.err.println("File exists");
         }
@@ -43,7 +45,7 @@ public class CopyFile {
 
     public static void main(String[] args) {
         CopyFile copyFile = new CopyFile();
-        copyFile.readFileSource("F:/java.io.file/module2Unit17CopyFile");
-        copyFile.writeFileDestination("F:/java.io.file/module2Unit17PasteFile");
+        copyFile.readFileSource("F:/java.io.file/module2Unit17CopyFile.txt");
+        copyFile.writeFileDestination("F:/java.io.file/module2Unit17PasteFile.txt");
     }
 }
