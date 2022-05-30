@@ -1,0 +1,3 @@
+name='nam', age=24, birthDay=Fri Mar 03 00:00:00 ICT 2000, numberPhone=234, address='qa'nameClass='C2', dateBegin=1/2/2022, course=2, numberOfStudents=20
+name='vu', age=23, birthDay=Sat Jan 01 00:00:00 ICT 2000, numberPhone=234, address='bin'nameClass='C3', dateBegin=1/3/2022, course=3, numberOfStudents=20
+name='son', age=22, birthDay=Sat Feb 02 00:00:00 ICT 2002, numberPhone=456, address='ha nam'nameClass='C2', dateBegin=1/2/2022, course=2, numberOfStudents=20
