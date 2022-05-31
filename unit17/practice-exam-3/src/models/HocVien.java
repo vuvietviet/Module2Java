@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class HocVien {
+public class HocVien implements Serializable {
     private String name;
     private int age;
     private Date birthDay;

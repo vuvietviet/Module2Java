@@ -1,6 +1,7 @@
 package controllers;
 
 import io.ReaderAndWriter;
+import io.ReaderAndWriterObj;
 import models.HocVien;
 import models.Lop;
 
@@ -11,7 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManagerStudent {
-    ReaderAndWriter readerAndWriter = new ReaderAndWriter();
+//    ReaderAndWriter readerAndWriter = new ReaderAndWriter();
+    ReaderAndWriterObj readerAndWriterObj = new ReaderAndWriterObj();
     Scanner sc = new Scanner(System.in);
     List<Lop> lopList = new ArrayList<>();
 
@@ -21,7 +23,8 @@ public class ManagerStudent {
         lopList.add(new Lop("C1",new Date("1/1/2022"),1,20));
         lopList.add(new Lop("C2",new Date("1/2/2022"),2,20));
         lopList.add(new Lop("C3",new Date("1/3/2022"),3,20));
-        hocVienList = readerAndWriter.reader(lopList);
+//        hocVienList = readerAndWriter.reader(lopList);
+        hocVienList = readerAndWriterObj.reader(lopList);
     }
 
     public void menu() {
@@ -77,7 +80,8 @@ public class ManagerStudent {
                 hocVienList.add(new HocVien(name,age,birthday,numberPhone,address,lopList.get(2)));
                 break;
         }
-        readerAndWriter.writeFile(hocVienList);
+//        readerAndWriter.writeFile(hocVienList);
+        readerAndWriterObj.writeFile(hocVienList);
     }
 
     public void showClass() {
@@ -87,13 +91,6 @@ public class ManagerStudent {
         }
     }
 
-//    public List<Lop> createClass() {
-//        List<Lop> lopList = new ArrayList<>();
-//        lopList.add(new Lop("C1",new Date("1/1/2022"),1,20));
-//        lopList.add(new Lop("C2",new Date("1/2/2022"),2,20));
-//        lopList.add(new Lop("C3",new Date("1/3/2022"),3,20));
-//        return lopList;
-//    }
 
     public void showStudents() {
         for (HocVien ele: hocVienList) {

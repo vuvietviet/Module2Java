@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Lop {
+public class Lop implements Serializable {
     private String nameClass;
     private Date dateBegin;
     private int course;
