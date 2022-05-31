@@ -1,18 +1,28 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+package controllers;
+
+import io.ReaderAndWriter;
+import models.HocVien;
+import models.Lop;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerStuent {
+public class ManagerStudent {
+    ReaderAndWriter readerAndWriter = new ReaderAndWriter();
     Scanner sc = new Scanner(System.in);
-    List<Lop> lopList = createClass();
+    List<Lop> lopList = new ArrayList<>();
 
     List<HocVien> hocVienList = new ArrayList<>();
+
+    public ManagerStudent() {
+        lopList.add(new Lop("C1",new Date("1/1/2022"),1,20));
+        lopList.add(new Lop("C2",new Date("1/2/2022"),2,20));
+        lopList.add(new Lop("C3",new Date("1/3/2022"),3,20));
+        hocVienList = readerAndWriter.reader(lopList);
+    }
 
     public void menu() {
         System.out.println("Menu");
@@ -67,7 +77,7 @@ public class ManagerStuent {
                 hocVienList.add(new HocVien(name,age,birthday,numberPhone,address,lopList.get(2)));
                 break;
         }
-        writeFile();
+        readerAndWriter.writeFile(hocVienList);
     }
 
     public void showClass() {
@@ -77,13 +87,13 @@ public class ManagerStuent {
         }
     }
 
-    public List<Lop> createClass() {
-        List<Lop> lopList = new ArrayList<>();
-        lopList.add(new Lop("C1","1/1/2022",1,20));
-        lopList.add(new Lop("C2","1/2/2022",2,20));
-        lopList.add(new Lop("C3","1/3/2022",3,20));
-        return lopList;
-    }
+//    public List<Lop> createClass() {
+//        List<Lop> lopList = new ArrayList<>();
+//        lopList.add(new Lop("C1",new Date("1/1/2022"),1,20));
+//        lopList.add(new Lop("C2",new Date("1/2/2022"),2,20));
+//        lopList.add(new Lop("C3",new Date("1/3/2022"),3,20));
+//        return lopList;
+//    }
 
     public void showStudents() {
         for (HocVien ele: hocVienList) {
@@ -108,19 +118,4 @@ public class ManagerStuent {
         }
     }
 
-    public void writeFile() {
-        File file = new File("listOfStudents.csv");
-        try {
-            FileWriter fileWriter = new FileWriter(file,true);
-            BufferedWriter bw = new BufferedWriter(fileWriter);
-            for (HocVien ele: hocVienList) {
-                bw.write(ele.toString());
-                bw.newLine();
-            }
-            bw.close();
-            fileWriter.close();
-        } catch (IOException e) {
-            System.err.println("IOException!");
-        }
-    }
 }

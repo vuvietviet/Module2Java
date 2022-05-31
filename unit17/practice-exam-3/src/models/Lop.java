@@ -1,15 +1,18 @@
+package models;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Lop {
     private String nameClass;
-    private String dateBegin;
+    private Date dateBegin;
     private int course;
     private int numberOfStudents;
 
     public Lop() {
     }
 
-    public Lop(String nameClass, String dateBegin, int course, int numberOfStudents) {
+    public Lop(String nameClass, Date dateBegin, int course, int numberOfStudents) {
         this.nameClass = nameClass;
         this.dateBegin = dateBegin;
         this.course = course;
@@ -24,11 +27,11 @@ public class Lop {
         this.nameClass = nameClass;
     }
 
-    public String getDateBegin() {
+    public Date getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(String dateBegin) {
+    public void setDateBegin(Date dateBegin) {
         this.dateBegin = dateBegin;
     }
 
@@ -54,5 +57,10 @@ public class Lop {
                 ", dateBegin=" + dateBegin +
                 ", course=" + course +
                 ", numberOfStudents=" + numberOfStudents;
+    }
+
+    public String write() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return nameClass + "," +formatter.format(dateBegin) + "," + course + "," + numberOfStudents;
     }
 }

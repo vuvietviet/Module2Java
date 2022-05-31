@@ -1,3 +1,6 @@
+package models;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class HocVien {
@@ -76,5 +79,11 @@ public class HocVien {
                 ", numberPhone=" + numberPhone +
                 ", address='" + address + '\'' +
                 lop.toString();
+    }
+
+    public String write() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return name + "," + age + "," + formatter.format(birthDay) + "," + numberPhone + "," +
+                address + "," + lop.getNameClass();
     }
 }
