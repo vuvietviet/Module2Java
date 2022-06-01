@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class ManagerPro {
     ReaderAndWriter readerAndWriter = new ReaderAndWriter();
     Scanner sc = new Scanner(System.in);
-    List<Product> productList = new ArrayList<>();
+
+    List<Product> productList = readerAndWriter.readFile();
 
     public void menu() {
         System.out.println("Menu");
@@ -38,7 +39,7 @@ public class ManagerPro {
     }
 
     public void show() {
-        for (Product ele: readerAndWriter.readFile()) {
+        for (Product ele: productList) {
             System.out.println(ele);
         }
     }
