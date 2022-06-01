@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class ManagerStudents {
     Scanner sc = new Scanner(System.in);
-    List<Students> studentsList = new ArrayList<>();
     ReaderAndWriter readerAndWriter = new ReaderAndWriter();
+    List<Students> studentsList = readerAndWriter.readFile();
     public void menu() {
         System.out.println("-----CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN-------");
         System.out.println("Chọn chức năng theo số (để tiếp tục)");
