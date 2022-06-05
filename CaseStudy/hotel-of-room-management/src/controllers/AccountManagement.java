@@ -1,5 +1,6 @@
 package controllers;
 
+import io.ReaderAndWriterAccount;
 import models.Account;
 import validate.AccountValidate;
 
@@ -8,9 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountManagement {
-    List<Account> accountList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     AccountValidate accountValidate = new AccountValidate();
+    ReaderAndWriterAccount readerAndWriterAccount = new ReaderAndWriterAccount();
+    List<Account> accountList = readerAndWriterAccount.readFile();
     public void menuAccount() {
         System.out.println("------Menu Account-----");
         System.out.println("1. Registration");
@@ -31,7 +33,7 @@ public class AccountManagement {
                 searchAccount();
                 break;
             case 5:
-                System.out.println(checkExistOfAccount());
+                checkExistOfAccount();
                 break;
         }
     }
@@ -44,7 +46,10 @@ public class AccountManagement {
         String email = accountValidate.validateEmail();
         int age = accountValidate.validateAge();
         String userName = accountValidate.validateString("user name");
+
         accountList.add(new Account(accountName,passWord,numberPhone,address,email,age,userName));
+
+        readerAndWriterAccount.writeFile(accountList);
         System.out.println("Register account success!");
     }
 
@@ -87,14 +92,15 @@ public class AccountManagement {
         }
     }
 
-    public String checkExistOfAccount() {
+    public void checkExistOfAccount() {
         System.out.println("Input user name:");
         String userName = scanner.nextLine();
+        String display = "Not exist";
         for (Account ac: accountList) {
             if (ac.getUseName().equals(userName)) {
-                return "Existing";
+                display =  "Existing";
             }
         }
-        return "Not exist";
+        System.out.println(display);
     }
 }

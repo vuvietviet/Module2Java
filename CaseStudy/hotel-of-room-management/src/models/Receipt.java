@@ -18,9 +18,9 @@ public class Receipt extends Room{
         this.customerName = customerName;
     }
 
-    public Receipt(String nameRoom, int priceRoom, String statusRoom, int toiletNumber,
-                   int bedroomNumber, Date startTime, Date endTime, String rentalStaffName, String customerName) {
-        super(nameRoom, priceRoom, statusRoom, toiletNumber, bedroomNumber);
+    public Receipt(String nameRoom, int priceRoom, Date startTime, Date endTime,
+                   String rentalStaffName, String customerName) {
+        super(nameRoom, priceRoom);
         this.startTime = startTime;
         this.endTime = endTime;
         this.rentalStaffName = rentalStaffName;
@@ -59,9 +59,15 @@ public class Receipt extends Room{
         this.customerName = customerName;
     }
 
+    public int calculateTotalAmount() {
+        return endTime.getDate() - startTime.getDate();
+    }
+
     @Override
     public String toString() {
         return "Receipt{" +
+                "nameRoom='" + super.getNameRoom() + '\'' +
+                ", priceRoom=" + super.getPriceRoom() +
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", rentalStaffName='" + rentalStaffName + '\'' +
@@ -70,6 +76,6 @@ public class Receipt extends Room{
     }
 
     public String write() {
-        return startTime + "," + endTime + "," + rentalStaffName + "," + customerName;
+        return super.getNameRoom() + "," + super.getPriceRoom() + "," + startTime + "," + endTime + "," + rentalStaffName + "," + customerName;
     }
 }
