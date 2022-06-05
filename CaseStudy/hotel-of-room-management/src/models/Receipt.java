@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 
 public class Receipt extends Room{
+    private String idReceipt;
     private Date startTime;
     private Date endTime;
     private String rentalStaffName;
@@ -11,20 +12,30 @@ public class Receipt extends Room{
     public Receipt() {
     }
 
-    public Receipt(Date startTime, Date endTime, String rentalStaffName, String customerName) {
+    public Receipt(String idReceipt,Date startTime, Date endTime, String rentalStaffName, String customerName) {
+        this.idReceipt = idReceipt;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rentalStaffName = rentalStaffName;
         this.customerName = customerName;
     }
 
-    public Receipt(String nameRoom, int priceRoom, Date startTime, Date endTime,
+    public Receipt(String nameRoom, int priceRoom, String idReceipt,Date startTime, Date endTime,
                    String rentalStaffName, String customerName) {
         super(nameRoom, priceRoom);
+        this.idReceipt = idReceipt;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rentalStaffName = rentalStaffName;
         this.customerName = customerName;
+    }
+
+    public String getIdReceipt() {
+        return idReceipt;
+    }
+
+    public void setIdReceipt(String idReceipt) {
+        this.idReceipt = idReceipt;
     }
 
     public Date getStartTime() {
@@ -59,8 +70,12 @@ public class Receipt extends Room{
         this.customerName = customerName;
     }
 
-    public int calculateTotalAmount() {
+    public int calculateTotalDate() {
         return endTime.getDate() - startTime.getDate();
+    }
+
+    public int calculateTotalAReceipt() {
+        return calculateTotalDate() * super.getPriceRoom();
     }
 
     @Override
@@ -68,14 +83,18 @@ public class Receipt extends Room{
         return "Receipt{" +
                 "nameRoom='" + super.getNameRoom() + '\'' +
                 ", priceRoom=" + super.getPriceRoom() +
-                "startTime=" + startTime +
+                ", idReceipt=" + idReceipt +
+                ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", rentalStaffName='" + rentalStaffName + '\'' +
                 ", customerName='" + customerName + '\'' +
+                "totalPayable=" + calculateTotalAReceipt() +
                 '}';
     }
 
     public String write() {
-        return super.getNameRoom() + "," + super.getPriceRoom() + "," + startTime + "," + endTime + "," + rentalStaffName + "," + customerName;
+        return super.getNameRoom() + "," + super.getPriceRoom() + "," +
+                idReceipt + "," + startTime + "," + endTime + "," +
+                rentalStaffName + "," + customerName;
     }
 }
