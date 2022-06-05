@@ -2,6 +2,7 @@ package validate;
 
 import models.Account;
 import models.Receipt;
+import models.Room;
 import org.omg.IOP.CodecPackage.FormatMismatch;
 
 import java.text.ParseException;
@@ -14,6 +15,37 @@ import java.util.regex.Pattern;
 
 public class ReceiptValidate {
     Scanner scanner = new Scanner(System.in);
+    public int getIndexNameRoom(String nameRoom, List<Room> roomList) {
+        for (int i = 0; i < roomList.size(); i++) {
+            if (roomList.get(i).getNameRoom().equals(nameRoom)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String validateNameRoom(List<Room> roomList) {
+        while (true) {
+            try {
+                System.out.println("Input name room:");
+                String nameRoom = scanner.nextLine();
+                if (getIndexNameRoom(nameRoom, roomList) == -1) {
+                    throw new Exception();
+                }
+                Pattern pattern = Pattern.compile("[0-9]{4}");
+                Matcher matcher = pattern.matcher(nameRoom);
+                if (matcher.matches()) {
+                    return nameRoom;
+                } else {
+                    throw new FormatMismatch();
+                }
+            } catch (FormatMismatch f) {
+                System.err.println("Format name room");
+            } catch (Exception e) {
+                System.err.println("Not found name room");
+            }
+        }
+    }
     public int getIndexIdReceipt(String idReceipt, List<Receipt> receiptList) {
         for (int i = 0; i < receiptList.size(); i++) {
             if (receiptList.get(i).getIdReceipt().equals(idReceipt)) {

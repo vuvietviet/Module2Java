@@ -74,7 +74,7 @@ public class Receipt extends Room{
         return endTime.getDate() - startTime.getDate();
     }
 
-    public int calculateTotalAReceipt() {
+    public int calculateTotalPayable() {
         return calculateTotalDate() * super.getPriceRoom();
     }
 
@@ -88,7 +88,7 @@ public class Receipt extends Room{
                 ", endTime=" + endTime +
                 ", rentalStaffName='" + rentalStaffName + '\'' +
                 ", customerName='" + customerName + '\'' +
-                "totalPayable=" + calculateTotalAReceipt() +
+                "totalPayable=" + calculateTotalPayable() +
                 '}';
     }
 

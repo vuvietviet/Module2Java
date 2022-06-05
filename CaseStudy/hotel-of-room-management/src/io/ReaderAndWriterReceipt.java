@@ -75,30 +75,4 @@ public class ReaderAndWriterReceipt {
         }
         return newReceiptList;
     }
-
-    public List<Room> readFileRoom() {
-        List<Room> newRoomList = new ArrayList<>();
-        File file = new File("rooms.csv");
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String str = bufferedReader.readLine();
-            while (str != null) {
-                String[] arrStr = str.split(",");
-                String nameRoom = arrStr[0];
-                int priceRoom = Integer.parseInt(arrStr[1]);
-                String statusRoom = arrStr[2];
-                int toiletNumber = Integer.parseInt(arrStr[3]);
-                int bedroomNumber = Integer.parseInt(arrStr[4]);
-                newRoomList.add(new Room(nameRoom,priceRoom,statusRoom,toiletNumber,bedroomNumber));
-                str = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-            fileReader.close();
-            System.out.println("Read file success");
-        } catch (IOException e) {
-            System.err.println("File does not exist");
-        }
-        return newRoomList;
-    }
 }

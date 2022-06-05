@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class AccountManagement {
     Scanner scanner = new Scanner(System.in);
+    RoomManagement roomManagement = new RoomManagement();
+    ReceiptManagement receiptManagement = new ReceiptManagement();
     AccountValidate accountValidate = new AccountValidate();
     ReaderAndWriterAccount readerAndWriterAccount = new ReaderAndWriterAccount();
     List<Account> accountList = readerAndWriterAccount.readFile();
@@ -26,6 +28,8 @@ public class AccountManagement {
                 registration();
                 break;
             case 2:
+                logIn();
+                break;
             case 3:
                 showAccountList();
                 break;
@@ -60,7 +64,7 @@ public class AccountManagement {
         String passWord = scanner.nextLine();
         for (Account ac: accountList) {
             if (ac.getAccountName().equals(accountName) && ac.getPassWord().equals(passWord)) {
-                // menu chức năng
+                menuMain(ac);
             } else if (ac.equals(accountList.get(accountList.size() - 1))) {
                 System.out.println("Not found account");
             }
@@ -102,5 +106,31 @@ public class AccountManagement {
             }
         }
         System.out.println(display);
+    }
+
+    public void menuMain(Account account) {
+        System.out.println("---------Menu-------");
+        System.out.println("1. Show information of account");
+        System.out.println("2. Room management");
+        System.out.println("3. Receipt management");
+        System.out.println("4. Monthly revenue statistics");
+        System.out.println("5. Exit");
+        int choice = Integer.parseInt(scanner.nextLine());
+        switch (choice) {
+            case 1:
+                System.out.println(account.toString());
+                break;
+            case 2:
+                roomManagement.menuRoom();
+                break;
+            case 3:
+                receiptManagement.menuReceipt();
+                break;
+            case 4:
+                receiptManagement.monthlyRevenue();
+                break;
+            case 5:
+                break;
+        }
     }
 }
