@@ -18,7 +18,7 @@ public class ReaderAndWriterAccount {
             }
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Write file success");
+            System.out.println("Write file account success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }
@@ -45,7 +45,7 @@ public class ReaderAndWriterAccount {
             }
             bufferedReader.close();
             fileReader.close();
-            System.out.println("Read file success");
+            System.out.println("Read file account success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }

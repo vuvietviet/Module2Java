@@ -22,7 +22,7 @@ public class ReaderAndWriterReceipt {
             }
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Write file success");
+            System.out.println("Write file receipt success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }
@@ -40,37 +40,30 @@ public class ReaderAndWriterReceipt {
                 String nameRoom = arrStr[0];
                 int priceRoom = Integer.parseInt(arrStr[1]);
                 String idReceipt = arrStr[2];
+
                 Date startTime = null;
-                boolean check1 = false;
-                while (!check1) {
-                    try {
-                        System.out.println("Input birthday:");
-                        startTime = new SimpleDateFormat("dd/MM/yyyy").parse(arrStr[3]);
-                        check1 = true;
-                    } catch (Exception e) {
-                        System.err.println("Error at format of birthday(dd/MM/yyyy)");
-                    }
+                try {
+                    startTime = new SimpleDateFormat("dd/MM/yyyy").parse(arrStr[3]);
+                } catch (Exception e) {
+                    System.err.println("Error at format of birthday(dd/MM/yyyy)");
                 }
+
                 Date endTime = null;
-                boolean check2 = false;
-                while (!check2) {
-                    try {
-                        System.out.println("Input birthday:");
-                        endTime = new SimpleDateFormat("dd/MM/yyyy").parse(arrStr[4]);
-                        check2 = true;
-                    } catch (Exception e) {
-                        System.err.println("Error at format of birthday(dd/MM/yyyy)");
-                    }
+                try {
+                    endTime = new SimpleDateFormat("dd/MM/yyyy").parse(arrStr[4]);
+                } catch (Exception e) {
+                    System.err.println("Error at format of birthday(dd/MM/yyyy)");
                 }
+
                 String rentalStaffName = arrStr[5];
                 String customerName = arrStr[6];
                 String statusReceipt = arrStr[7];
-                newReceiptList.add(new Receipt(nameRoom,priceRoom,idReceipt,startTime,endTime,rentalStaffName,customerName,statusReceipt));
+                newReceiptList.add(new Receipt(nameRoom, priceRoom, idReceipt, startTime, endTime, rentalStaffName, customerName, statusReceipt));
                 str = bufferedReader.readLine();
             }
             bufferedReader.close();
             fileReader.close();
-            System.out.println("Read file success");
+            System.out.println("Read file receipt success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }

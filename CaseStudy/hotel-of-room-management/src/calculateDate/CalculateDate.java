@@ -24,11 +24,11 @@ public class CalculateDate {
 
     public int calculateTotalDate(Date startTime, Date endTime) {
         int totalDate = 0;
-        if (startTime.getMonth() == endTime.getMonth() &&
-        startTime.getYear() == endTime.getYear()) {
+        if (startTime.getMonth() + 1 == endTime.getMonth() + 1 &&
+        startTime.getYear() + 1900 == endTime.getYear() + 1900) {
             totalDate = endTime.getDate() - startTime.getDate();
         } else {
-            switch (startTime.getMonth()) {
+            switch (startTime.getMonth() + 1) {
                 case 1:
                 case 3:
                 case 5:
@@ -45,7 +45,7 @@ public class CalculateDate {
                     totalDate = 30 - startTime.getDate() + endTime.getDate();
                     break;
                 case 2:
-                    if (checkYear(startTime.getYear())) {
+                    if (checkYear(startTime.getYear() + 1900)) {
                         totalDate = 29 - startTime.getDate() + endTime.getDate();
                     } else {
                         totalDate = 28 - startTime.getDate() + endTime.getDate();

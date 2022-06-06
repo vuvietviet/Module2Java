@@ -2,6 +2,7 @@ package models;
 
 import calculateDate.CalculateDate;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Receipt extends Room{
@@ -108,8 +109,9 @@ public class Receipt extends Room{
     }
 
     public String write() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return super.getNameRoom() + "," + super.getPriceRoom() + "," +
-                idReceipt + "," + startTime + "," + endTime + "," +
+                idReceipt + "," + formatter.format(startTime) + "," + formatter.format(endTime) + "," +
                 rentalStaffName + "," + customerName + "," + statusReceipt;
     }
 }

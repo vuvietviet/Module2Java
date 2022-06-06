@@ -113,26 +113,16 @@ public class ReceiptManagement {
     }
 
     public void monthlyRevenue(){
-        List<Integer> totalPayableList = new ArrayList<>();
-        long totalMonthlyRevenue = 0;
+        int totalMonthlyRevenue = 0;
         int month = receiptValidate.validateMonth();
         int year = receiptValidate.validateYear();
         for (int i = 0; i < receiptList.size(); i++) {
-            if (receiptList.get(i).getEndTime().getMonth() == month &&
-                    receiptList.get(i).getEndTime().getYear() == year &&
+            if (receiptList.get(i).getEndTime().getMonth() + 1 == month &&
+                    receiptList.get(i).getEndTime().getYear() + 1900 == year &&
             receiptList.get(i).getStatusReceipt().equals("Paid")) {
-                totalPayableList.add(receiptList.get(i).calculateTotalPayable());
+                totalMonthlyRevenue += receiptList.get(i).calculateTotalPayable();
             }
         }
-
-        try {
-            for (Integer number: totalPayableList) {
-                totalMonthlyRevenue += number;
-            }
-        } catch (Exception e) {
-            System.out.println("Total revenue of month " + month + " year " + year + " = " + totalMonthlyRevenue);
-        }
-
         System.out.println("Total revenue of month " + month + " year " + year + " = " + totalMonthlyRevenue);
     }
 

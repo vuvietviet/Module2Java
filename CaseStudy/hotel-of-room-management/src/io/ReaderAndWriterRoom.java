@@ -19,7 +19,7 @@ public class ReaderAndWriterRoom {
             }
             bufferedWriter.close();
             fileWriter.close();
-            System.out.println("Write file success");
+            System.out.println("Write file room success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }
@@ -44,7 +44,7 @@ public class ReaderAndWriterRoom {
             }
             bufferedReader.close();
             fileReader.close();
-            System.out.println("Read file success");
+            System.out.println("Read file room success");
         } catch (IOException e) {
             System.err.println("File does not exist");
         }
