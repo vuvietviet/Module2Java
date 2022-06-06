@@ -118,4 +118,67 @@ public class ReceiptValidate {
             }
         }
     }
+
+    public String validateStatusReceipt() {
+        while (true) {
+            try {
+                System.out.println("Input status receipt: ");
+                System.out.println("1. Paid");
+                System.out.println("2. Unpaid");
+                System.out.println("Select a number: ");
+                String statusRoom = "Select overflow";
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        statusRoom = "Paid";
+                        break;
+                    case 2:
+                        statusRoom = "Unpaid";
+                        break;
+                }
+
+                return statusRoom;
+            } catch (Exception e) {
+                System.err.println("Format select" );
+            }
+        }
+    }
+
+    public int validateMonth() {
+        while (true) {
+            try {
+                System.out.println("Input month to calculate revenue:");
+                String month = scanner.nextLine();
+
+                Pattern pattern = Pattern.compile("^(1[0-2]|[1-9])$");
+                Matcher matcher = pattern.matcher(month);
+                if (matcher.matches()) {
+                    return Integer.parseInt(month);
+                } else {
+                    throw new FormatMismatch();
+                }
+            } catch (FormatMismatch f) {
+                System.err.println("Format month" );
+            }
+        }
+    }
+
+    public int validateYear() {
+        while (true) {
+            try {
+                System.out.println("Input year have month to calculate revenue:");
+                String year = scanner.nextLine();
+
+                Pattern pattern = Pattern.compile("^2[0-9]{3}$");
+                Matcher matcher = pattern.matcher(year);
+                if (matcher.matches()) {
+                    return Integer.parseInt(year);
+                } else {
+                    throw new FormatMismatch();
+                }
+            } catch (FormatMismatch f) {
+                System.err.println("Format year" );
+            }
+        }
+    }
 }

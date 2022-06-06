@@ -1,6 +1,5 @@
 package validate;
 
-import models.Account;
 import models.Room;
 import org.omg.IOP.CodecPackage.FormatMismatch;
 
@@ -70,7 +69,6 @@ public class RoomValidate {
                 System.out.println("1. Room with people");
                 System.out.println("2. Room is empty");
                 System.out.println("3. Room is repair");
-                System.out.println("4. Room is clean");
                 System.out.println("Select a number: ");
                 String statusRoom = "";
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -83,9 +81,6 @@ public class RoomValidate {
                         break;
                     case 3:
                         statusRoom = "Room is repair";
-                        break;
-                    case 4:
-                        statusRoom = "Room is clean";
                         break;
                 }
 

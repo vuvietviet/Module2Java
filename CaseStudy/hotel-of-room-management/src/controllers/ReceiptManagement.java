@@ -21,25 +21,43 @@ public class ReceiptManagement {
     List<Receipt> receiptList = readerAndWriterReceipt.readFile();
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuReceipt() {
-        System.out.println("------Menu Receipt-----");
-        System.out.println("1. Add receipt");
-        System.out.println("2. Edit information of receipt");
-        System.out.println("3. Search receipt");
-        System.out.println("4. Show list of receipt");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                addReceipt();
-                break;
-            case 2:
-                editReceipt();
-                break;
-            case 3:
-                searchReceipt();
-                break;
-            case 4:
-                showReceiptList();
-                break;
+        while (true) {
+            System.out.println("------Menu Receipt-----");
+            System.out.println("1. Add receipt");
+            System.out.println("2. Edit information of receipt");
+            System.out.println("3. Search receipt");
+            System.out.println("4. Show list of receipt");
+            System.out.println("5. Paid and return the room");
+            System.out.println("6. Exit");
+            System.out.println("Select a number: ");
+            boolean check = false;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        addReceipt();
+                        break;
+                    case 2:
+                        editReceipt();
+                        break;
+                    case 3:
+                        searchReceipt();
+                        break;
+                    case 4:
+                        showReceiptList();
+                        break;
+                    case 5:
+                        resetStatus();
+                        break;
+                    case 6:
+                        check = true;
+                }
+                if (check) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.err.println("Format select");
+            }
         }
     }
 
@@ -51,8 +69,9 @@ public class ReceiptManagement {
         Date endTime = receiptValidate.validateDate("end time");
         String rentalStaffName = receiptValidate.validateString("rental staff name");
         String customerName = receiptValidate.validateString("customer name");
-        resetStatusRoom(nameRoom);
-        return new Receipt(nameRoom,priceRoom,idReceipt,startTime,endTime,rentalStaffName,customerName);
+        String statusReceipt = receiptValidate.validateStatusReceipt();
+        changeStatusRoom(nameRoom,"Room with people");
+        return new Receipt(nameRoom,priceRoom,idReceipt,startTime,endTime,rentalStaffName,customerName,statusReceipt);
     }
 
     public void addReceipt() {
@@ -68,6 +87,7 @@ public class ReceiptManagement {
         for (int i = 0; i < receiptList.size(); i++) {
             if (receiptList.get(i).getIdReceipt().equals(idReceipt)) {
                 receiptList.set(i,createReceipt());
+                readerAndWriterReceipt.writeFile(receiptList);
                 display = "Edit success";
             }
         }
@@ -93,15 +113,14 @@ public class ReceiptManagement {
     }
 
     public void monthlyRevenue(){
-        List<Integer> totalPayableList = new ArrayList<Integer>();
+        List<Integer> totalPayableList = new ArrayList<>();
         long totalMonthlyRevenue = 0;
-        System.out.println("Input month to calculate revenue:");
-        int month = Integer.parseInt(scanner.nextLine());
-        System.out.println("Input year have month to calculate revenue:");
-        int year = Integer.parseInt(scanner.nextLine());
+        int month = receiptValidate.validateMonth();
+        int year = receiptValidate.validateYear();
         for (int i = 0; i < receiptList.size(); i++) {
             if (receiptList.get(i).getEndTime().getMonth() == month &&
-                    receiptList.get(i).getEndTime().getYear() == year) {
+                    receiptList.get(i).getEndTime().getYear() == year &&
+            receiptList.get(i).getStatusReceipt().equals("Paid")) {
                 totalPayableList.add(receiptList.get(i).calculateTotalPayable());
             }
         }
@@ -117,13 +136,28 @@ public class ReceiptManagement {
         System.out.println("Total revenue of month " + month + " year " + year + " = " + totalMonthlyRevenue);
     }
 
-    public void resetStatusRoom(String nameRoom) {
-        String display = "Not found name room to reset status";
+    public void changeStatusRoom(String nameRoom, String statusRoom) {
+        String display = "Not found name room to change status";
         for (int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getNameRoom().equals(nameRoom)) {
-                roomList.get(i).setStatusRoom("Room with people");
+                roomList.get(i).setStatusRoom(statusRoom);
                 readerAndWriterRoom.writeFile(roomList);
-                display = "Reset status success";
+                display = "Change status success";
+            }
+        }
+        System.out.println(display);
+    }
+
+    public void resetStatus() {
+        System.out.println("Input id receipt to reset status:");
+        String idReceipt = scanner.nextLine();
+        String display = "Not found id receipt to reset";
+        for (int i = 0; i < receiptList.size(); i++) {
+            if (receiptList.get(i).getIdReceipt().equals(idReceipt)) {
+                receiptList.get(i).setStatusReceipt("Paid");
+                readerAndWriterReceipt.writeFile(receiptList);
+                changeStatusRoom(receiptList.get(i).getNameRoom(),"Room is empty");
+                display = "Reset success";
             }
         }
         System.out.println(display);

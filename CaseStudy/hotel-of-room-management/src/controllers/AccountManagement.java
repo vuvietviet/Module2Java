@@ -16,29 +16,39 @@ public class AccountManagement {
     ReaderAndWriterAccount readerAndWriterAccount = new ReaderAndWriterAccount();
     List<Account> accountList = readerAndWriterAccount.readFile();
     public void menuAccount() {
-        System.out.println("------Menu Account-----");
-        System.out.println("1. Registration");
-        System.out.println("2. Log in");
-        System.out.println("3. Show list of account");
-        System.out.println("4. Search account");
-        System.out.println("5. Check exist of account");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                registration();
+        while (true) {
+            System.out.println("------Menu Account-----");
+            System.out.println("1. Registration");
+            System.out.println("2. Log in");
+            System.out.println("3. Show list of account");
+            System.out.println("4. Search account");
+            System.out.println("5. Check exist of account");
+            System.out.println("Select a number: ");
+
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        registration();
+                        break;
+                    case 2:
+                        logIn();
+                        break;
+                    case 3:
+                        showAccountList();
+                        break;
+                    case 4:
+                        searchAccount();
+                        break;
+                    case 5:
+                        checkExistOfAccount();
+                        break;
+                }
                 break;
-            case 2:
-                logIn();
-                break;
-            case 3:
-                showAccountList();
-                break;
-            case 4:
-                searchAccount();
-                break;
-            case 5:
-                checkExistOfAccount();
-                break;
+            } catch (Exception e) {
+                System.err.println("Format select");
+            }
+
         }
     }
 
@@ -109,28 +119,40 @@ public class AccountManagement {
     }
 
     public void menuMain(Account account) {
-        System.out.println("---------Menu-------");
-        System.out.println("1. Show information of account");
-        System.out.println("2. Room management");
-        System.out.println("3. Receipt management");
-        System.out.println("4. Monthly revenue statistics");
-        System.out.println("5. Exit");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                System.out.println(account.toString());
-                break;
-            case 2:
-                roomManagement.menuRoom();
-                break;
-            case 3:
-                receiptManagement.menuReceipt();
-                break;
-            case 4:
-                receiptManagement.monthlyRevenue();
-                break;
-            case 5:
-                break;
+        while (true) {
+            System.out.println("---------Menu-------");
+            System.out.println("1. Show information of account");
+            System.out.println("2. Room management");
+            System.out.println("3. Receipt management");
+            System.out.println("4. Monthly revenue statistics");
+            System.out.println("5. Exit");
+            System.out.println("Select a number:");
+            boolean check = false;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.println(account.toString());
+                        break;
+                    case 2:
+                        roomManagement.menuRoom();
+                        break;
+                    case 3:
+                        receiptManagement.menuReceipt();
+                        break;
+                    case 4:
+                        receiptManagement.monthlyRevenue();
+                        break;
+                    case 5:
+                        check = true;
+                        break;
+                }
+                if (check) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.err.println("Format select");
+            }
         }
     }
 }

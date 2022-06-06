@@ -2,6 +2,7 @@ package controllers;
 
 import io.ReaderAndWriterRoom;
 import models.Room;
+import validate.ReceiptValidate;
 import validate.RoomValidate;
 
 import java.util.ArrayList;
@@ -11,37 +12,61 @@ import java.util.Scanner;
 public class RoomManagement {
     Scanner scanner = new Scanner(System.in);
     RoomValidate roomValidate = new RoomValidate();
+    ReceiptValidate receiptValidate = new ReceiptValidate();
     ReaderAndWriterRoom readerAndWriterRoom = new ReaderAndWriterRoom();
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuRoom() {
-        System.out.println("------Menu Room-----");
-        System.out.println("1. Add room");
-        System.out.println("2. Edit information of room");
-        System.out.println("3. Delete room");
-        System.out.println("4. Search empty room by price");
-        System.out.println("5. Show list of room");
-        int choice = Integer.parseInt(scanner.nextLine());
-        switch (choice) {
-            case 1:
-                addRoom();
-                break;
-            case 2:
-                editRoom();
-                break;
-            case 3:
-                deleteRoom();
-                break;
-            case 4:
-                searchRoomByPrice();
-                break;
-            case 5:
-                showList();
-                break;
+        while (true) {
+            System.out.println("------Menu Room-----");
+            System.out.println("1. Add room");
+            System.out.println("2. Edit information of room");
+            System.out.println("3. Delete room");
+            System.out.println("4. Search empty room by price");
+            System.out.println("5. Show list of room");
+            System.out.println("6. Exit");
+            System.out.println("Select a number:");
+            boolean check = false;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        addRoom();
+                        break;
+                    case 2:
+                        editRoom();
+                        break;
+                    case 3:
+                        deleteRoom();
+                        break;
+                    case 4:
+                        searchRoomByPrice();
+                        break;
+                    case 5:
+                        showList();
+                        break;
+                    case 6:
+                        check = true;
+                }
+                if (check) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.err.println("Format select");
+            }
         }
     }
 
     public Room createRoom() {
         String nameRoom = roomValidate.validateNameRoom(roomList);
+        int priceRoom = roomValidate.validatePriceRoom();
+        String statusRoom = roomValidate.validateStatusRoom();
+        int toiletNumber = roomValidate.validateNumberOf("toilet number");
+        int bedroomNumber = roomValidate.validateNumberOf("bedroom number");
+        return new Room(nameRoom,priceRoom,statusRoom,toiletNumber,bedroomNumber);
+    }
+
+    public Room createRoomToEdit() {
+        String nameRoom = receiptValidate.validateNameRoom(roomList);
         int priceRoom = roomValidate.validatePriceRoom();
         String statusRoom = roomValidate.validateStatusRoom();
         int toiletNumber = roomValidate.validateNumberOf("toilet number");
@@ -61,7 +86,8 @@ public class RoomManagement {
         String display = "Not found name room to edit";
         for (int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getNameRoom().equals(nameRoom)) {
-                roomList.set(i,createRoom());
+                roomList.set(i,createRoomToEdit());
+                readerAndWriterRoom.writeFile(roomList);
                 display = "Edit success";
             }
         }
@@ -75,6 +101,7 @@ public class RoomManagement {
         for (int i = 0; i < roomList.size(); i++) {
             if (roomList.get(i).getNameRoom().equals(nameRoom)) {
                 roomList.remove(i);
+                readerAndWriterRoom.writeFile(roomList);
                 display = "Delete success";
             }
         }

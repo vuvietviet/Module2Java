@@ -1,6 +1,5 @@
 package validate;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.RegularExpression;
 import models.Account;
 import org.omg.IOP.CodecPackage.FormatMismatch;
 
@@ -125,7 +124,7 @@ public class AccountValidate {
                 System.out.println("Input age: ");
                 String age = scanner.nextLine();
 
-                Pattern pattern = Pattern.compile("[19|(^[2-9][0-9])]");
+                Pattern pattern = Pattern.compile("19|(^[2-9][0-9])");
                 Matcher matcher = pattern.matcher(age);
                 if (matcher.matches()) {
                     return Integer.parseInt(age);

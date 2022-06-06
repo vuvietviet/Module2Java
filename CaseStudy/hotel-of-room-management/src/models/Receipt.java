@@ -1,5 +1,7 @@
 package models;
 
+import calculateDate.CalculateDate;
+
 import java.util.Date;
 
 public class Receipt extends Room{
@@ -8,26 +10,30 @@ public class Receipt extends Room{
     private Date endTime;
     private String rentalStaffName;
     private String customerName;
+    private String statusReceipt;
+    CalculateDate calculateDate = new CalculateDate();
 
     public Receipt() {
     }
 
-    public Receipt(String idReceipt,Date startTime, Date endTime, String rentalStaffName, String customerName) {
+    public Receipt(String idReceipt,Date startTime, Date endTime, String rentalStaffName, String customerName, String statusReceipt) {
         this.idReceipt = idReceipt;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rentalStaffName = rentalStaffName;
         this.customerName = customerName;
+        this.statusReceipt = statusReceipt;
     }
 
     public Receipt(String nameRoom, int priceRoom, String idReceipt,Date startTime, Date endTime,
-                   String rentalStaffName, String customerName) {
+                   String rentalStaffName, String customerName, String statusReceipt) {
         super(nameRoom, priceRoom);
         this.idReceipt = idReceipt;
         this.startTime = startTime;
         this.endTime = endTime;
         this.rentalStaffName = rentalStaffName;
         this.customerName = customerName;
+        this.statusReceipt = statusReceipt;
     }
 
     public String getIdReceipt() {
@@ -70,8 +76,16 @@ public class Receipt extends Room{
         this.customerName = customerName;
     }
 
+    public String getStatusReceipt() {
+        return statusReceipt;
+    }
+
+    public void setStatusReceipt(String statusReceipt) {
+        this.statusReceipt = statusReceipt;
+    }
+
     public int calculateTotalDate() {
-        return endTime.getDate() - startTime.getDate();
+        return calculateDate.calculateTotalDate(startTime,endTime);
     }
 
     public int calculateTotalPayable() {
@@ -88,6 +102,7 @@ public class Receipt extends Room{
                 ", endTime=" + endTime +
                 ", rentalStaffName='" + rentalStaffName + '\'' +
                 ", customerName='" + customerName + '\'' +
+                ", statusReceipt='" +statusReceipt + '\'' +
                 "totalPayable=" + calculateTotalPayable() +
                 '}';
     }
@@ -95,6 +110,6 @@ public class Receipt extends Room{
     public String write() {
         return super.getNameRoom() + "," + super.getPriceRoom() + "," +
                 idReceipt + "," + startTime + "," + endTime + "," +
-                rentalStaffName + "," + customerName;
+                rentalStaffName + "," + customerName + "," + statusReceipt;
     }
 }
