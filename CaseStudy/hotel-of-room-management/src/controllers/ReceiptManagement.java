@@ -4,6 +4,7 @@ import io.ReaderAndWriterReceipt;
 import io.ReaderAndWriterRoom;
 import models.Receipt;
 import models.Room;
+import sort.ReceiptSort;
 import validate.ReceiptValidate;
 import validate.RoomValidate;
 
@@ -22,13 +23,14 @@ public class ReceiptManagement {
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuReceipt() {
         while (true) {
-            System.out.println("------Menu Receipt-----");
+            System.out.println("\n------Menu Receipt-----");
             System.out.println("1. Add receipt");
             System.out.println("2. Edit information of receipt");
             System.out.println("3. Search receipt");
             System.out.println("4. Show list of receipt");
-            System.out.println("5. Paid and return the room");
-            System.out.println("6. Exit");
+            System.out.println("5. Sort from newReceipt to oldReceipt");
+            System.out.println("6. Paid and return the room");
+            System.out.println("7. Exit");
             System.out.println("Select a number: ");
             boolean check = false;
             try {
@@ -47,9 +49,12 @@ public class ReceiptManagement {
                         showReceiptList();
                         break;
                     case 5:
-                        resetStatus();
+                        sortReceipt();
                         break;
                     case 6:
+                        resetStatus();
+                        break;
+                    case 7:
                         check = true;
                 }
                 if (check) {
@@ -107,9 +112,15 @@ public class ReceiptManagement {
     }
 
     public void showReceiptList() {
-        for (Receipt receipt: receiptList) {
-            System.out.println(receipt);
+        for (int i = 0; i < receiptList.size(); i++) {
+            if ((i+1) % 5 == 0) {
+                System.out.println(receiptList.get(i));
+                scanner.nextLine();
+            } else {
+                System.out.println(receiptList.get(i));
+            }
         }
+
     }
 
     public void monthlyRevenue(){
@@ -151,5 +162,11 @@ public class ReceiptManagement {
             }
         }
         System.out.println(display);
+    }
+
+    public void sortReceipt() {
+        receiptList.sort(new ReceiptSort());
+        readerAndWriterReceipt.writeFile(receiptList);
+        System.out.println("Sort receipt success");
     }
 }

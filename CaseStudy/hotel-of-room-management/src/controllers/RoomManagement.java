@@ -2,6 +2,8 @@ package controllers;
 
 import io.ReaderAndWriterRoom;
 import models.Room;
+import sort.ReceiptSort;
+import sort.RoomSort;
 import validate.ReceiptValidate;
 import validate.RoomValidate;
 
@@ -17,13 +19,14 @@ public class RoomManagement {
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuRoom() {
         while (true) {
-            System.out.println("------Menu Room-----");
+            System.out.println("\n------Menu Room-----");
             System.out.println("1. Add room");
             System.out.println("2. Edit information of room");
             System.out.println("3. Delete room");
             System.out.println("4. Search empty room by price");
             System.out.println("5. Show list of room");
-            System.out.println("6. Exit");
+            System.out.println("6. Sort room to floor");
+            System.out.println("7. Exit");
             System.out.println("Select a number:");
             boolean check = false;
             try {
@@ -45,6 +48,9 @@ public class RoomManagement {
                         showList();
                         break;
                     case 6:
+                        sortRoom();
+                        break;
+                    case 7:
                         check = true;
                 }
                 if (check) {
@@ -132,8 +138,19 @@ public class RoomManagement {
     }
 
     public void showList() {
-        for (Room room: roomList) {
-            System.out.println(room);
+        for (int i = 0; i < roomList.size(); i++) {
+            if ((i+1) % 6 == 0) {
+                System.out.println(roomList.get(i));
+                scanner.nextLine();
+            } else {
+                System.out.println(roomList.get(i));
+            }
         }
+    }
+
+    public void sortRoom() {
+        roomList.sort(new RoomSort());
+        readerAndWriterRoom.writeFile(roomList);
+        System.out.println("Sort room success");
     }
 }
