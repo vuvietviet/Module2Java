@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReaderAndWriterRoom {
     public void writeFile(List<Room> roomList) {
-        File file = new File("rooms.csv");
+        File file = new File("F:\\Module2\\CaseStudy\\hotel-of-room-management\\src\\fileCSV\\rooms.csv");
         try {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -27,7 +27,7 @@ public class ReaderAndWriterRoom {
 
     public List<Room> readFile() {
         List<Room> newRoomList = new ArrayList<>();
-        File file = new File("rooms.csv");
+        File file = new File("F:\\Module2\\CaseStudy\\hotel-of-room-management\\src\\fileCSV\\rooms.csv");
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);

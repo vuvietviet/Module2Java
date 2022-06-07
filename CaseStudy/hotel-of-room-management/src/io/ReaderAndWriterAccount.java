@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReaderAndWriterAccount {
     public void writeFile(List<Account> accountList) {
-        File file = new File("accounts.csv");
+        File file = new File("F:\\Module2\\CaseStudy\\hotel-of-room-management\\src\\fileCSV\\accounts.csv");
         try {
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -26,7 +26,7 @@ public class ReaderAndWriterAccount {
 
     public List<Account> readFile() {
         List<Account> newAccountList = new ArrayList<>();
-        File file = new File("accounts.csv");
+        File file = new File("F:\\Module2\\CaseStudy\\hotel-of-room-management\\src\\fileCSV\\accounts.csv");
         try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);

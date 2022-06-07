@@ -74,6 +74,7 @@ public class AccountManagement {
         String passWord = scanner.nextLine();
         for (Account ac: accountList) {
             if (ac.getAccountName().equals(accountName) && ac.getPassWord().equals(passWord)) {
+                System.out.println("Hello " + ac.getUseName());
                 menuMain(ac);
             } else if (ac.equals(accountList.get(accountList.size() - 1))) {
                 System.out.println("Not found account");
@@ -118,14 +119,28 @@ public class AccountManagement {
         System.out.println(display);
     }
 
+    public void changePasswordAccount(Account account) {
+        System.out.println("Input old password: ");
+        String oldPassword = scanner.nextLine();
+        if (account.getPassWord().equals(oldPassword)) {
+            String newPassword = accountValidate.validatePassWord();
+            account.setPassWord(newPassword);
+            readerAndWriterAccount.writeFile(accountList);
+            System.out.println("Change password success");
+        } else {
+            System.out.println("Wrong old password");
+        }
+    }
+
     public void menuMain(Account account) {
         while (true) {
             System.out.println("---------Menu-------");
             System.out.println("1. Show information of account");
-            System.out.println("2. Room management");
-            System.out.println("3. Receipt management");
-            System.out.println("4. Monthly revenue statistics");
-            System.out.println("5. Exit");
+            System.out.println("2. Change password of account");
+            System.out.println("3. Room management");
+            System.out.println("4. Receipt management");
+            System.out.println("5. Monthly revenue statistics");
+            System.out.println("6. Exit");
             System.out.println("Select a number:");
             boolean check = false;
             try {
@@ -135,15 +150,18 @@ public class AccountManagement {
                         System.out.println(account.toString());
                         break;
                     case 2:
-                        roomManagement.menuRoom();
+                        changePasswordAccount(account);
                         break;
                     case 3:
-                        receiptManagement.menuReceipt();
+                        roomManagement.menuRoom();
                         break;
                     case 4:
-                        receiptManagement.monthlyRevenue();
+                        receiptManagement.menuReceipt();
                         break;
                     case 5:
+                        receiptManagement.monthlyRevenue();
+                        break;
+                    case 6:
                         check = true;
                         break;
                 }
