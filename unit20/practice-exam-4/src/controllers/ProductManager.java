@@ -51,11 +51,9 @@ public class ProductManager {
                         break;
                     case 7:
                         productsList = readerAndWriter.readFile();
-                        System.out.println("Đọc file thành công");
                         break;
                     case 8:
                         readerAndWriter.writeFile(productsList);
-                        System.out.println("Ghi file thành công");
                         break;
                     case 9:
                         System.exit(0);
