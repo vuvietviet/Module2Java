@@ -24,7 +24,7 @@ public class ReceiptValidate {
         return -1;
     }
 
-    public String validateNameRoom(List<Room> roomList) {
+    public String validateNameRoomDuplicate(List<Room> roomList) {
         while (true) {
             try {
                 System.out.println("Input name room:");

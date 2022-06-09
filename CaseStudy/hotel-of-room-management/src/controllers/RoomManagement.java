@@ -72,7 +72,7 @@ public class RoomManagement {
     }
 
     public Room createRoomToEdit() {
-        String nameRoom = receiptValidate.validateNameRoom(roomList);
+        String nameRoom = receiptValidate.validateNameRoomDuplicate(roomList);
         int priceRoom = roomValidate.validatePriceRoom();
         String statusRoom = roomValidate.validateStatusRoom();
         int toiletNumber = roomValidate.validateNumberOf("toilet number");

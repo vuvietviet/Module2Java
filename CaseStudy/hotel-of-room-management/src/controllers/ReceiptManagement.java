@@ -68,8 +68,8 @@ public class ReceiptManagement {
     }
 
     public Receipt createReceipt(Account account) {
-        String nameRoom = receiptValidate.validateNameRoom(roomList);
-        int priceRoom = roomValidate.validatePriceRoom();
+        String nameRoom = receiptValidate.validateNameRoomDuplicate(roomList);
+        int priceRoom = roomList.get(roomValidate.getIndexNameRoom(nameRoom,roomList)).getPriceRoom();
         String idReceipt = receiptValidate.validateIdReceipt(receiptList);
         Date startTime = receiptValidate.validateDate("start time");
         Date endTime = receiptValidate.validateDate("end time");
