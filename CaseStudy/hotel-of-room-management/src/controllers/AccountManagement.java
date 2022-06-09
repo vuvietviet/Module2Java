@@ -17,7 +17,7 @@ public class AccountManagement {
     List<Account> accountList = readerAndWriterAccount.readFile();
     {
         if (accountList.size() == 0) {
-            accountList.add(new Account("vu_viet_viet","matkhauday","0968686868","ThaiThuy_ThaiBinh","vuvietviet@gmail.com",26,"vu_viet","admin"));
+            accountList.add(new Account("vu_viet_viet","matkhauday","0968686868","ThaiThuy_ThaiBinh","vuvietviet@gmail.com",26,"vu_viet","manager"));
         }
     }
     public void menuAccount() {
@@ -65,7 +65,7 @@ public class AccountManagement {
         String email = accountValidate.validateEmail();
         int age = accountValidate.validateAge();
         String userName = accountValidate.validateString("user name");
-        String role = "user";
+        String role = "staff";
 
         accountList.add(new Account(accountName,passWord,numberPhone,address,email,age,userName,role));
 
@@ -81,11 +81,12 @@ public class AccountManagement {
         for (Account ac: accountList) {
             if (ac.getAccountName().equals(accountName) && ac.getPassWord().equals(passWord)) {
                 System.out.println("Hello " + ac.getUseName());
-                if (ac.getRole().equals("admin")) {
-                    menuAdmin(ac);
+                if (ac.getRole().equals("manager")) {
+                    menuManager(ac);
                 } else {
-                    menuUser(ac);
+                    menuStaff(ac);
                 }
+                break;
             } else if (ac.equals(accountList.get(accountList.size() - 1))) {
                 System.out.println("Not found account");
             }
@@ -129,6 +130,47 @@ public class AccountManagement {
         System.out.println(display);
     }
 
+    public Account createAccountToEdit(Account account) {
+        String accountName = account.getAccountName();
+        String passWord = accountValidate.validatePassWord();
+        String numberPhone = accountValidate.validateNumberPhone();
+        String address = accountValidate.validateString("address");
+        String email = accountValidate.validateEmail();
+        int age = accountValidate.validateAge();
+        String userName = accountValidate.validateString("user name");
+        String role = "staff";
+
+        return new Account(accountName,passWord,numberPhone,address,email,age,userName,role);
+    }
+
+    public void editAccount() {
+        System.out.println("Input name of account to edit:");
+        String accountName = scanner.nextLine();
+        String display = "Not found name account to edit";
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getAccountName().equals(accountName)) {
+                accountList.set(i,createAccountToEdit(accountList.get(i)));
+                readerAndWriterAccount.writeFile(accountList);
+                display = "Edit account success!";
+            }
+        }
+        System.out.println(display);
+    }
+
+    public void deleteAccount() {
+        System.out.println("Input name of account to delete:");
+        String accountName = scanner.nextLine();
+        String display = "Not found name account to delete";
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getAccountName().equals(accountName)) {
+                accountList.remove(i);
+                readerAndWriterAccount.writeFile(accountList);
+                display = "Delete account success!";
+            }
+        }
+        System.out.println(display);
+    }
+
     public void changePasswordAccount(Account account) {
         System.out.println("Input old password: ");
         String oldPassword = scanner.nextLine();
@@ -142,15 +184,17 @@ public class AccountManagement {
         }
     }
 
-    public void menuAdmin(Account account) {
+    public void menuManager(Account account) {
         while (true) {
             System.out.println("\n---------Menu-------");
             System.out.println("1. Show information of account");
             System.out.println("2. Change password of account");
-            System.out.println("3. Room management");
-            System.out.println("4. Receipt management");
-            System.out.println("5. Monthly revenue statistics");
-            System.out.println("6. Exit");
+            System.out.println("3. Edit account");
+            System.out.println("4. Delete account");
+            System.out.println("5. Room management");
+            System.out.println("6. Receipt management");
+            System.out.println("7. Monthly revenue statistics");
+            System.out.println("8. Exit");
             System.out.println("Select a number:");
             boolean check = false;
             try {
@@ -163,15 +207,21 @@ public class AccountManagement {
                         changePasswordAccount(account);
                         break;
                     case 3:
-                        roomManagement.menuRoom();
+                        editAccount();
                         break;
                     case 4:
-                        receiptManagement.menuReceipt(account);
+                        deleteAccount();
                         break;
                     case 5:
-                        receiptManagement.monthlyRevenue();
+                        roomManagement.menuRoom();
                         break;
                     case 6:
+                        receiptManagement.menuReceipt(account);
+                        break;
+                    case 7:
+                        receiptManagement.monthlyRevenue();
+                        break;
+                    case 8:
                         check = true;
                         break;
                 }
@@ -184,7 +234,7 @@ public class AccountManagement {
         }
     }
 
-    public void menuUser(Account account) {
+    public void menuStaff(Account account) {
         while (true) {
             System.out.println("\n---------Menu-------");
             System.out.println("1. Show information of account");
