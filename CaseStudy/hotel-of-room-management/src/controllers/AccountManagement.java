@@ -15,6 +15,11 @@ public class AccountManagement {
     AccountValidate accountValidate = new AccountValidate();
     ReaderAndWriterAccount readerAndWriterAccount = new ReaderAndWriterAccount();
     List<Account> accountList = readerAndWriterAccount.readFile();
+    {
+        if (accountList.size() == 0) {
+            accountList.add(new Account("vu_viet_viet","matkhauday","0968686868","ThaiThuy_ThaiBinh","vuvietviet@gmail.com",26,"vu_viet","admin"));
+        }
+    }
     public void menuAccount() {
         while (true) {
             System.out.println("\n------Menu Account-----");
@@ -60,8 +65,9 @@ public class AccountManagement {
         String email = accountValidate.validateEmail();
         int age = accountValidate.validateAge();
         String userName = accountValidate.validateString("user name");
+        String role = "user";
 
-        accountList.add(new Account(accountName,passWord,numberPhone,address,email,age,userName));
+        accountList.add(new Account(accountName,passWord,numberPhone,address,email,age,userName,role));
 
         readerAndWriterAccount.writeFile(accountList);
         System.out.println("Register account success!");
@@ -75,7 +81,11 @@ public class AccountManagement {
         for (Account ac: accountList) {
             if (ac.getAccountName().equals(accountName) && ac.getPassWord().equals(passWord)) {
                 System.out.println("Hello " + ac.getUseName());
-                menuMain(ac);
+                if (ac.getRole().equals("admin")) {
+                    menuAdmin(ac);
+                } else {
+                    menuUser(ac);
+                }
             } else if (ac.equals(accountList.get(accountList.size() - 1))) {
                 System.out.println("Not found account");
             }
@@ -132,7 +142,7 @@ public class AccountManagement {
         }
     }
 
-    public void menuMain(Account account) {
+    public void menuAdmin(Account account) {
         while (true) {
             System.out.println("\n---------Menu-------");
             System.out.println("1. Show information of account");
@@ -156,12 +166,50 @@ public class AccountManagement {
                         roomManagement.menuRoom();
                         break;
                     case 4:
-                        receiptManagement.menuReceipt();
+                        receiptManagement.menuReceipt(account);
                         break;
                     case 5:
                         receiptManagement.monthlyRevenue();
                         break;
                     case 6:
+                        check = true;
+                        break;
+                }
+                if (check) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.err.println("Format select");
+            }
+        }
+    }
+
+    public void menuUser(Account account) {
+        while (true) {
+            System.out.println("\n---------Menu-------");
+            System.out.println("1. Show information of account");
+            System.out.println("2. Change password of account");
+            System.out.println("3. Room management");
+            System.out.println("4. Receipt management");
+            System.out.println("5. Exit");
+            System.out.println("Select a number:");
+            boolean check = false;
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.println(account.toString());
+                        break;
+                    case 2:
+                        changePasswordAccount(account);
+                        break;
+                    case 3:
+                        roomManagement.menuRoom();
+                        break;
+                    case 4:
+                        receiptManagement.menuReceipt(account);
+                        break;
+                    case 5:
                         check = true;
                         break;
                 }

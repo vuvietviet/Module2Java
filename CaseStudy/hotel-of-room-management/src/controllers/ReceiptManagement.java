@@ -2,6 +2,7 @@ package controllers;
 
 import io.ReaderAndWriterReceipt;
 import io.ReaderAndWriterRoom;
+import models.Account;
 import models.Receipt;
 import models.Room;
 import sort.ReceiptSort;
@@ -21,7 +22,7 @@ public class ReceiptManagement {
     ReaderAndWriterRoom readerAndWriterRoom = new ReaderAndWriterRoom();
     List<Receipt> receiptList = readerAndWriterReceipt.readFile();
     List<Room> roomList = readerAndWriterRoom.readFile();
-    public void menuReceipt() {
+    public void menuReceipt(Account account) {
         while (true) {
             System.out.println("\n------Menu Receipt-----");
             System.out.println("1. Add receipt");
@@ -37,10 +38,10 @@ public class ReceiptManagement {
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        addReceipt();
+                        addReceipt(account);
                         break;
                     case 2:
-                        editReceipt();
+                        editReceipt(account);
                         break;
                     case 3:
                         searchReceipt();
@@ -66,32 +67,32 @@ public class ReceiptManagement {
         }
     }
 
-    public Receipt createReceipt() {
+    public Receipt createReceipt(Account account) {
         String nameRoom = receiptValidate.validateNameRoom(roomList);
         int priceRoom = roomValidate.validatePriceRoom();
         String idReceipt = receiptValidate.validateIdReceipt(receiptList);
         Date startTime = receiptValidate.validateDate("start time");
         Date endTime = receiptValidate.validateDate("end time");
-        String rentalStaffName = receiptValidate.validateString("rental staff name");
+        String rentalStaffName = account.getUseName();
         String customerName = receiptValidate.validateString("customer name");
         String statusReceipt = receiptValidate.validateStatusReceipt();
         changeStatusRoom(nameRoom,"Room with people");
         return new Receipt(nameRoom,priceRoom,idReceipt,startTime,endTime,rentalStaffName,customerName,statusReceipt);
     }
 
-    public void addReceipt() {
-        receiptList.add(createReceipt());
+    public void addReceipt(Account account) {
+        receiptList.add(createReceipt(account));
         readerAndWriterReceipt.writeFile(receiptList);
         System.out.println("Add receipt success");
     }
 
-    public void editReceipt() {
+    public void editReceipt(Account account) {
         System.out.println("Input id receipt to edit:");
         String idReceipt = scanner.nextLine();
         String display = "Not found id receipt to edit";
         for (int i = 0; i < receiptList.size(); i++) {
             if (receiptList.get(i).getIdReceipt().equals(idReceipt)) {
-                receiptList.set(i,createReceipt());
+                receiptList.set(i,createReceipt(account));
                 readerAndWriterReceipt.writeFile(receiptList);
                 display = "Edit success";
             }

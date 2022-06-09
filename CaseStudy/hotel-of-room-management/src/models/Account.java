@@ -8,12 +8,13 @@ public class Account {
     private String email;
     private int age;
     private String useName;
+    private String role;
 
     public Account() {
     }
 
     public Account(String accountName, String passWord, String numberPhone,
-                   String address, String email, int age, String useName) {
+                   String address, String email, int age, String useName,String role) {
         this.accountName = accountName;
         this.passWord = passWord;
         this.numberPhone = numberPhone;
@@ -21,6 +22,7 @@ public class Account {
         this.email = email;
         this.age = age;
         this.useName = useName;
+        this.role = role;
     }
 
     public String getAccountName() {
@@ -79,6 +81,14 @@ public class Account {
         this.useName = useName;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -89,11 +99,12 @@ public class Account {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", useName='" + useName + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 
     public String write() {
         return accountName + "," + passWord + "," + numberPhone + "," +
-                address + "," + email + "," + age + "," + useName;
+                address + "," + email + "," + age + "," + useName + "," + role;
     }
 }
