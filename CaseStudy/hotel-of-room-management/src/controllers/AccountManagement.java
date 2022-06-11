@@ -22,7 +22,7 @@ public class AccountManagement {
     }
     public void menuAccount() {
         while (true) {
-            System.out.println("\n------Menu Account-----");
+            System.out.println("\n/////////////////////-----MENU ACCOUNT-----///////////////////////");
             System.out.println("1. Registration");
             System.out.println("2. Log in");
             System.out.println("3. Show list of account");
@@ -186,7 +186,7 @@ public class AccountManagement {
 
     public void menuManager(Account account) {
         while (true) {
-            System.out.println("\n---------Menu-------");
+            System.out.println("\n/////////////////////-----MENU-----///////////////////////");
             System.out.println("1. Show information of account");
             System.out.println("2. Change password of account");
             System.out.println("3. Edit account");
@@ -236,7 +236,7 @@ public class AccountManagement {
 
     public void menuStaff(Account account) {
         while (true) {
-            System.out.println("\n---------Menu-------");
+            System.out.println("\n/////////////////////-----MENU-----///////////////////////");
             System.out.println("1. Show information of account");
             System.out.println("2. Change password of account");
             System.out.println("3. Room management");

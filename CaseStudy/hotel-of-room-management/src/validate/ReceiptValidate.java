@@ -1,6 +1,5 @@
 package validate;
 
-import models.Account;
 import models.Receipt;
 import models.Room;
 import org.omg.IOP.CodecPackage.FormatMismatch;

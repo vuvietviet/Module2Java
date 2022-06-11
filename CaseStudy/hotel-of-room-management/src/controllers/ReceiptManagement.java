@@ -9,7 +9,6 @@ import sort.ReceiptSort;
 import validate.ReceiptValidate;
 import validate.RoomValidate;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +23,7 @@ public class ReceiptManagement {
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuReceipt(Account account) {
         while (true) {
-            System.out.println("\n------Menu Receipt-----");
+            System.out.println("\n/////////////////////-----MENU RECEIPT-----///////////////////////");
             System.out.println("1. Add receipt");
             System.out.println("2. Edit information of receipt");
             System.out.println("3. Search receipt");

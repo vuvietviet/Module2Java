@@ -1,8 +1,6 @@
 package io;
 
-import models.Account;
 import models.Receipt;
-import models.Room;
 
 import java.io.*;
 import java.text.SimpleDateFormat;

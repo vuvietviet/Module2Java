@@ -2,7 +2,6 @@ package controllers;
 
 import io.ReaderAndWriterRoom;
 import models.Room;
-import sort.ReceiptSort;
 import sort.RoomSort;
 import validate.ReceiptValidate;
 import validate.RoomValidate;
@@ -19,7 +18,7 @@ public class RoomManagement {
     List<Room> roomList = readerAndWriterRoom.readFile();
     public void menuRoom() {
         while (true) {
-            System.out.println("\n------Menu Room-----");
+            System.out.println("\n/////////////////////-----MENU ROOM-----///////////////////////");
             System.out.println("1. Add room");
             System.out.println("2. Edit information of room");
             System.out.println("3. Delete room");

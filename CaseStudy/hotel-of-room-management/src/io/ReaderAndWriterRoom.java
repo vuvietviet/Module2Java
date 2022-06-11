@@ -1,6 +1,5 @@
 package io;
 
-import models.Account;
 import models.Room;
 
 import java.io.*;
