@@ -67,6 +67,7 @@ public class RoomManagement {
         String statusRoom = roomValidate.validateStatusRoom();
         int toiletNumber = roomValidate.validateNumberOf("toilet number");
         int bedroomNumber = roomValidate.validateNumberOf("bedroom number");
+
         return new Room(nameRoom,priceRoom,statusRoom,toiletNumber,bedroomNumber);
     }
 
@@ -76,6 +77,7 @@ public class RoomManagement {
         String statusRoom = roomValidate.validateStatusRoom();
         int toiletNumber = roomValidate.validateNumberOf("toilet number");
         int bedroomNumber = roomValidate.validateNumberOf("bedroom number");
+
         return new Room(nameRoom,priceRoom,statusRoom,toiletNumber,bedroomNumber);
     }
 
@@ -132,7 +134,7 @@ public class RoomManagement {
                 System.out.println(room);
             }
         } catch (Exception e) {
-            System.err.println("Not found room to desire price");
+            System.err.println("Not found room with desire price");
         }
     }
 

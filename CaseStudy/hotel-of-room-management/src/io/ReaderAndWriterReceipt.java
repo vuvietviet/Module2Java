@@ -56,6 +56,7 @@ public class ReaderAndWriterReceipt {
                 String rentalStaffName = arrStr[5];
                 String customerName = arrStr[6];
                 String statusReceipt = arrStr[7];
+
                 newReceiptList.add(new Receipt(nameRoom, priceRoom, idReceipt, startTime, endTime, rentalStaffName, customerName, statusReceipt));
                 str = bufferedReader.readLine();
             }

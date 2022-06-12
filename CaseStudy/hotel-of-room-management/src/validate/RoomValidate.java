@@ -83,10 +83,13 @@ public class RoomValidate {
                         statusRoom = "Room is repair";
                         break;
                 }
-
-                return statusRoom;
+                if (!statusRoom.equals("")) {
+                    return statusRoom;
+                } else {
+                    System.out.println(" Only select number from 1 to 3");
+                }
             } catch (Exception e) {
-                System.err.println("Select overflow or format select" );
+                System.err.println("Format select" );
             }
         }
     }

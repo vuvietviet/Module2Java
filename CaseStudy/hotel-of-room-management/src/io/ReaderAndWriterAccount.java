@@ -41,6 +41,7 @@ public class ReaderAndWriterAccount {
                 int age = Integer.parseInt(arrStr[5]);
                 String userName = arrStr[6];
                 String role = arrStr[7];
+
                 newAccountList.add(new Account(accountName,passWord,numberPhone,address,email,age,userName,role));
                 str = bufferedReader.readLine();
             }

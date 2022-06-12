@@ -86,8 +86,7 @@ public class ReceiptValidate {
                 Pattern pattern = Pattern.compile("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$");
                 Matcher matcher = pattern.matcher(inputDate);
                 if (matcher.matches()) {
-                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(inputDate);
-                    return date1;
+                    return new SimpleDateFormat("dd/MM/yyyy").parse(inputDate);
                 } else {
                     throw new FormatMismatch();
                 }
@@ -105,7 +104,7 @@ public class ReceiptValidate {
                 System.out.println("Input " + name + ": ");
                 String inputString = scanner.nextLine();
 
-                Pattern pattern = Pattern.compile("[a-zA-Z-_]+");
+                Pattern pattern = Pattern.compile("[a-zA-Z-_\\s]+");
                 Matcher matcher = pattern.matcher(inputString);
                 if (matcher.matches()) {
                     return inputString;
@@ -125,7 +124,7 @@ public class ReceiptValidate {
                 System.out.println("1. Paid");
                 System.out.println("2. Unpaid");
                 System.out.println("Select a number: ");
-                String statusRoom = "Select overflow";
+                String statusRoom = "";
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
@@ -135,8 +134,11 @@ public class ReceiptValidate {
                         statusRoom = "Unpaid";
                         break;
                 }
-
-                return statusRoom;
+                if (!statusRoom.equals("")) {
+                    return statusRoom;
+                } else {
+                    System.out.println(" Only select number 1 or 2");
+                }
             } catch (Exception e) {
                 System.err.println("Format select" );
             }

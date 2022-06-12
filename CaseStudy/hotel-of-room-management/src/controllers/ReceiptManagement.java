@@ -75,7 +75,9 @@ public class ReceiptManagement {
         String rentalStaffName = account.getUseName();
         String customerName = receiptValidate.validateString("customer name");
         String statusReceipt = receiptValidate.validateStatusReceipt();
+
         changeStatusRoom(nameRoom,"Room with people");
+
         return new Receipt(nameRoom,priceRoom,idReceipt,startTime,endTime,rentalStaffName,customerName,statusReceipt);
     }
 

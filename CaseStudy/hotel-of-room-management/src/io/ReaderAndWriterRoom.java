@@ -38,6 +38,7 @@ public class ReaderAndWriterRoom {
                 String statusRoom = arrStr[2];
                 int toiletNumber = Integer.parseInt(arrStr[3]);
                 int bedroomNumber = Integer.parseInt(arrStr[4]);
+
                 newRoomList.add(new Room(nameRoom,priceRoom,statusRoom,toiletNumber,bedroomNumber));
                 str = bufferedReader.readLine();
             }

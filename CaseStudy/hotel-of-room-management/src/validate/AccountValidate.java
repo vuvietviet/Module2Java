@@ -86,7 +86,7 @@ public class AccountValidate {
                 System.out.println("Input " + string + ": ");
                 String inputString = scanner.nextLine();
 
-                Pattern pattern = Pattern.compile("[a-zA-Z0-9-_]+");
+                Pattern pattern = Pattern.compile("[a-zA-Z0-9-_\\s]+");
                 Matcher matcher = pattern.matcher(inputString);
                 if (matcher.matches()) {
                     return inputString;
